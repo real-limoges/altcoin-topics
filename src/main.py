@@ -11,20 +11,17 @@ from auth_config import get_auth
 from requests.packages.urllib3.exceptions import ReadTimeoutError
 
 if __name__ == '__main__':
-    if len(sys.argv) == 2:
-        COIN = sys.argv[1]
-    else:
-        COIN = 'zec'
+    coin = sys.argv[1]
 
     twitter_authorization = get_auth()
-    coin_stream = AltcoinListener(COIN)
+    coin_stream = AltcoinListener(coin)
+    coin_stream.start_db_conn()
 
     real_time_tweets = tweepy.Stream(
         auth=twitter_authorization,
         listener=coin_stream)
-
     try:
-        real_time_tweets.filter(track=[COIN])
+        real_time_tweets.filter(track=[coin])
     except ReadTimeoutError:
         time.time(10)
-        real_time_tweets.filter(track=[COIN])
+        real_time_tweets.filter(track=[coin])
