@@ -19,9 +19,13 @@ if __name__ == '__main__':
 
     real_time_tweets = tweepy.Stream(
         auth=twitter_authorization,
-        listener=coin_stream)
+        listener=coin_stream,
+        async=True)
     try:
         real_time_tweets.filter(track=[coin])
     except ReadTimeoutError:
         time.time(10)
         real_time_tweets.filter(track=[coin])
+    except Exception as e:
+        print e
+        raise

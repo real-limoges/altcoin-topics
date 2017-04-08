@@ -35,10 +35,12 @@ class AltcoinListener(tweepy.StreamListener):
 
         Ingests the filtered data and extracts the text.
         '''
-        print json.loads(data)['text']
-        s_text = unicode(json.loads(data)['text'])
-        s_dict = dict(zip(['text'], [s_text]))
-        self.coll.insert_one(s_dict)
+        text = json.loads(data)['text']
+        if text.startswith('rt'):
+            pass
+        elif self.coin in [word.lower() for word in text.split(' ')]:
+            print json.loads(data)['text']
+            self.coll.insert_one(json.loads(data))
 
     def on_error(self, status_code):
         '''
