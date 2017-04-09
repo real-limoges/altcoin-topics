@@ -10,4 +10,4 @@ echo 'name := "Project"
 
 version := "1.0"
 
-scalaVersion := "2.10.0"' > build.sbt
+scalaVersion := "2.12.1"' > build.sbt
