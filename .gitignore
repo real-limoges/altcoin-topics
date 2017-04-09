@@ -1,3 +1,9 @@
 twitter_stream/config/*
 twitter_stream/*.pyc
 twitter_stream/*.py.swp
+
+poloniex/config/*
+poloniex/*.pyc
+poloniex/*.py.swp
+poloniex/node_modules/*
+poloniex/poloData.txt
